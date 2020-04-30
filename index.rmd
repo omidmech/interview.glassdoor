@@ -1,0 +1,6 @@
+---
+title: "About"
+output: html_document
+---
+
+# In this work the interview section of Glassdoor has been scraped. 

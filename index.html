@@ -11,7 +11,7 @@
 
 
 
-<title>First Asset</title>
+<title>About</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -292,91 +292,13 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">First Asset</h1>
+<h1 class="title toc-ignore">About</h1>
 
 </div>
 
 
-<pre class="r"><code>library(xml2)
-library(rvest)
-library(tibble)
-library(purrr)
-library(stringr)
-library(dplyr)
-library(lubridate)</code></pre>
-<div id="functions" class="section level1">
-<h1>FUNCTIONS</h1>
-<pre class="r"><code>##### intreview_date function ##### 
-intreview_date &lt;- function(html){
-  html %&gt;%
-  html_nodes(&quot;.empReview.cf&quot;) %&gt;%
-  map_df(~list(date = html_nodes(.x,&#39;.date.subtle.small&#39;) %&gt;% html_text() %&gt;% {if(length(.) == 0) NA else .})) %&gt;%
-  unlist(use.names = FALSE)
-}
-
-##### review_title function ##### 
-review_title &lt;- function(html){
-  html %&gt;%
-  html_nodes(&quot;.tbl.fill.reviewHdr&quot;) %&gt;%
-  map_df(~list(title = html_nodes(.x,&#39;.reviewer&#39;) %&gt;% html_text() %&gt;% {if(length(.) == 0) NA else .}))
-}
-
-##### intreview_location function ##### 
-intreview_location &lt;- function(html){
-  html %&gt;%
-  html_nodes(&#39;.tbl.fill.reviewHdr&#39;) %&gt;%
-  map_df(~list(location = html_node(.x, &#39;.authorLocation&#39;) %&gt;% html_text() %&gt;% {if(length(.) == 0) NA else .}))
-}</code></pre>
-</div>
-<div id="inputs" class="section level1">
-<h1>INPUTS</h1>
-<pre class="r"><code>url &lt;- &quot;https://www.glassdoor.com/Interview/Google-Interview-Questions-E9079_P%d.htm&quot;
-last_page &lt;- 1
-pages_url &lt;- str_c(sprintf(url,1:last_page))
-pages_url &lt;- gsub(&quot;_P1.htm&quot;,&quot;.htm&quot;,pages_url)
-pages_url[1]</code></pre>
-<pre><code>## [1] &quot;https://www.glassdoor.com/Interview/Google-Interview-Questions-E9079.htm&quot;</code></pre>
-<pre class="r"><code>print(&quot;...&quot;)</code></pre>
-<pre><code>## [1] &quot;...&quot;</code></pre>
-<pre class="r"><code>print(&quot;...&quot;)</code></pre>
-<pre><code>## [1] &quot;...&quot;</code></pre>
-<pre class="r"><code>print(&quot;...&quot;)</code></pre>
-<pre><code>## [1] &quot;...&quot;</code></pre>
-<pre class="r"><code>pages_url[last_page]</code></pre>
-<pre><code>## [1] &quot;https://www.glassdoor.com/Interview/Google-Interview-Questions-E9079.htm&quot;</code></pre>
-</div>
-<div id="analysis" class="section level1">
-<h1>ANALYSIS</h1>
-<pre class="r"><code>map_df(1:last_page,function(i){
-  cat(&quot;.&quot;)
-  page_html &lt;- read_html (pages_url[i])
-  Dates &lt;- intreview_date (page_html)
-  Title &lt;- review_title (page_html)
-  Location &lt;- intreview_location (page_html)
-  data.frame(Dates,Title,Location,stringsAsFactors = FALSE)
-  }) -&gt; result</code></pre>
-<pre><code>## .</code></pre>
-</div>
-<div id="number-of-interviews-per-year" class="section level1">
-<h1>Number of Interviews per Year</h1>
-<pre class="r"><code>Dates &lt;- as.Date(result$Dates,&quot; %B %d, %Y&quot;)
-Year &lt;- as.numeric(format(Dates,&#39;%Y&#39;))
-y &lt;- table(Year)
-par(mar=c(7,4,1,0.1))
-barplot(y, args.legend = list(x =&#39;top&#39;), ylab = &quot;Counts&quot;, cex.axis=1.0, cex.name=1.0, las=2, lwd=2, beside=TRUE)</code></pre>
-<p><img src="First_Asset_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
-</div>
-<div id="top-10-job-openings-in-google" class="section level1">
-<h1>Top 10 job openings in Google</h1>
-<pre class="r"><code>x &lt;- tail(sort(table(result$title)),10)
-pie(x, main=&quot;Precentage&quot;, col = rainbow(length(x)))</code></pre>
-<p><img src="First_Asset_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
-</div>
-<div id="top-10-googles-offices-with-highest-recriutment" class="section level1">
-<h1>Top 10 Google’s offices with highest recriutment</h1>
-<pre class="r"><code>x &lt;- tail(sort(table(result$location)),10)
-pie(x, main=&quot;Precentage&quot;, col = rainbow(length(x)))</code></pre>
-<p><img src="First_Asset_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<div id="in-this-work-the-interview-section-of-glassdoor-has-been-scraped." class="section level1">
+<h1>In this work the interview section of Glassdoor has been scraped.</h1>
 </div>
 
 
