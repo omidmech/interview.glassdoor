@@ -37,18 +37,18 @@ intreview_outcome <- function(html){
   html_nodes(".interviewOutcomes") %>%
   html_text()
 }
-
 ```
 
 ### INPUTS
 ```{r}
 url <- "https://www.glassdoor.com/Interview/Amazon-Interview-Questions-E6036_P%d.htm"
-last_page <- 1
+last_page <- 100
 pages_url <- str_c(sprintf(url,1:last_page))
 pages_url <- gsub("_P1.htm",".htm",pages_url)
 pages_url[1]
 pages_url[last_page]
 ```
+
 ### ANALYSIS
 ```{r}
 map_df(1:last_page,function(i){

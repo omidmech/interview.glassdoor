@@ -1,6 +1,8 @@
 ---
 title: "TDI Challenge"
-output: html_document
+output: 
+  html_document:
+    theme: yeti
 ---
 
 ### In this work the interview section of Glassdoor Website has been scraped. 

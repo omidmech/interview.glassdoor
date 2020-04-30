@@ -272,7 +272,7 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="about.html">Home</a>
+  <a href="index.html">Home</a>
 </li>
 <li>
   <a href="First_Asset.html">First Asset</a>
@@ -300,28 +300,10 @@ $(document).ready(function () {
 <pre class="r"><code>library(xml2)
 library(rvest)
 library(tibble)
-library(purrr)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;purrr&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:rvest&#39;:
-## 
-##     pluck</code></pre>
-<pre class="r"><code>library(stringr)
-library(dplyr)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;dplyr&#39;</code></pre>
-<pre><code>## The following objects are masked from &#39;package:stats&#39;:
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from &#39;package:base&#39;:
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<pre class="r"><code>library(lubridate)</code></pre>
-<pre><code>## 
-## Attaching package: &#39;lubridate&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:base&#39;:
-## 
-##     date</code></pre>
+library(purrr)
+library(stringr)
+library(dplyr)
+library(lubridate)</code></pre>
 <div id="functions" class="section level3">
 <h3>FUNCTIONS</h3>
 <pre class="r"><code>##### review_title function ##### 
@@ -348,13 +330,13 @@ intreview_outcome &lt;- function(html){
 <div id="inputs" class="section level3">
 <h3>INPUTS</h3>
 <pre class="r"><code>url &lt;- &quot;https://www.glassdoor.com/Interview/Amazon-Interview-Questions-E6036_P%d.htm&quot;
-last_page &lt;- 1
+last_page &lt;- 100
 pages_url &lt;- str_c(sprintf(url,1:last_page))
 pages_url &lt;- gsub(&quot;_P1.htm&quot;,&quot;.htm&quot;,pages_url)
 pages_url[1]</code></pre>
 <pre><code>## [1] &quot;https://www.glassdoor.com/Interview/Amazon-Interview-Questions-E6036.htm&quot;</code></pre>
 <pre class="r"><code>pages_url[last_page]</code></pre>
-<pre><code>## [1] &quot;https://www.glassdoor.com/Interview/Amazon-Interview-Questions-E6036.htm&quot;</code></pre>
+<pre><code>## [1] &quot;https://www.glassdoor.com/Interview/Amazon-Interview-Questions-E6036_P100.htm&quot;</code></pre>
 </div>
 <div id="analysis" class="section level3">
 <h3>ANALYSIS</h3>
@@ -369,7 +351,7 @@ pages_url[1]</code></pre>
     Interview_outcome &lt;- str_extract (Outcome,&quot;Difficult|Easy|Average&quot;)
   data.frame(Title,Location,Offer_outcome,Experience_outcome,Interview_outcome,stringsAsFactors = FALSE)
 }) -&gt; result</code></pre>
-<pre><code>## .</code></pre>
+<pre><code>## ....................................................................................................</code></pre>
 </div>
 <div id="number-of-negativepositive-interview-experience-in-the-top-10-job-openings-in-amazon" class="section level3">
 <h3>Number of Negative/Positive interview experience in the top 10 job openings in Amazon</h3>

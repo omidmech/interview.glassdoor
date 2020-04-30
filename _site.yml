@@ -3,7 +3,7 @@ navbar:
   title: "My Website"
   left:
     - text: "Home"
-      href: about.html
+      href: index.html
     - text: "First Asset"
       href: First_Asset.html
     - text: "Second Asset"

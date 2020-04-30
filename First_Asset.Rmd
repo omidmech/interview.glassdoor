@@ -1,6 +1,8 @@
 ---
 title: "First Asset"
-output: html_document
+output: 
+  html_document:
+    theme: yeti
 ---
 
 ```{r}
@@ -36,13 +38,12 @@ intreview_location <- function(html){
   html_nodes('.tbl.fill.reviewHdr') %>%
   map_df(~list(location = html_node(.x, '.authorLocation') %>% html_text() %>% {if(length(.) == 0) NA else .}))
 }
-
 ```
 
 ### INPUTS
 ```{r}
 url <- "https://www.glassdoor.com/Interview/Google-Interview-Questions-E9079_P%d.htm"
-last_page <- 10
+last_page <- 100
 pages_url <- str_c(sprintf(url,1:last_page))
 pages_url <- gsub("_P1.htm",".htm",pages_url)
 pages_url[1]
@@ -76,7 +77,7 @@ x <- tail(sort(table(result$title)),10)
 pie(x, main="Precentage", col = rainbow(length(x)))
 ```
 
-## Top 10 Google's offices with highest number of interview
+### Top 10 Google's offices with highest number of interview
 ```{r}
 x <- tail(sort(table(result$location)),10)
 pie(x, main="Precentage", col = rainbow(length(x)))
