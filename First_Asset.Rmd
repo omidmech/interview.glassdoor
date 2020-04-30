@@ -1,8 +1,5 @@
 ---
 title: "First Asset"
-output: 
-  html_document:
-    theme: yeti
 ---
 
 ```{r}
@@ -43,7 +40,7 @@ intreview_location <- function(html){
 ### INPUTS
 ```{r}
 url <- "https://www.glassdoor.com/Interview/Google-Interview-Questions-E9079_P%d.htm"
-last_page <- 100
+last_page <- 10
 pages_url <- str_c(sprintf(url,1:last_page))
 pages_url <- gsub("_P1.htm",".htm",pages_url)
 pages_url[1]

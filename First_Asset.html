@@ -15,12 +15,12 @@
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -102,33 +102,33 @@ summary {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 45px;
+  padding-top: 51px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 50px;
-  margin-top: -50px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h2 {
-  padding-top: 50px;
-  margin-top: -50px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h3 {
-  padding-top: 50px;
-  margin-top: -50px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h4 {
-  padding-top: 50px;
-  margin-top: -50px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h5 {
-  padding-top: 50px;
-  margin-top: -50px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .section h6 {
-  padding-top: 50px;
-  margin-top: -50px;
+  padding-top: 56px;
+  margin-top: -56px;
 }
 .dropdown-submenu {
   position: relative;
@@ -331,13 +331,13 @@ intreview_location &lt;- function(html){
 <div id="inputs" class="section level3">
 <h3>INPUTS</h3>
 <pre class="r"><code>url &lt;- &quot;https://www.glassdoor.com/Interview/Google-Interview-Questions-E9079_P%d.htm&quot;
-last_page &lt;- 100
+last_page &lt;- 10
 pages_url &lt;- str_c(sprintf(url,1:last_page))
 pages_url &lt;- gsub(&quot;_P1.htm&quot;,&quot;.htm&quot;,pages_url)
 pages_url[1]</code></pre>
 <pre><code>## [1] &quot;https://www.glassdoor.com/Interview/Google-Interview-Questions-E9079.htm&quot;</code></pre>
 <pre class="r"><code>pages_url[last_page]</code></pre>
-<pre><code>## [1] &quot;https://www.glassdoor.com/Interview/Google-Interview-Questions-E9079_P100.htm&quot;</code></pre>
+<pre><code>## [1] &quot;https://www.glassdoor.com/Interview/Google-Interview-Questions-E9079_P10.htm&quot;</code></pre>
 </div>
 <div id="analysis" class="section level3">
 <h3>ANALYSIS</h3>
@@ -349,7 +349,7 @@ pages_url[1]</code></pre>
   Location &lt;- intreview_location (page_html)
   data.frame(Dates,Title,Location,stringsAsFactors = FALSE)
   }) -&gt; result</code></pre>
-<pre><code>## ....................................................................................................</code></pre>
+<pre><code>## ..........</code></pre>
 </div>
 <div id="number-of-interviews-per-year" class="section level3">
 <h3>Number of Interviews per Year</h3>
@@ -358,19 +358,19 @@ Year &lt;- as.numeric(format(Dates,&#39;%Y&#39;))
 y &lt;- table(Year)
 par(mar=c(7,4,1,0.1))
 barplot(y, args.legend = list(x =&#39;top&#39;), ylab = &quot;Counts&quot;, cex.axis=1.0, cex.name=1.0, las=2, lwd=2, beside=TRUE)</code></pre>
-<p><img src="First_Asset_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="First_Asset_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 </div>
 <div id="top-10-job-openings-in-google" class="section level3">
 <h3>Top 10 job openings in Google</h3>
 <pre class="r"><code>x &lt;- tail(sort(table(result$title)),10)
 pie(x, main=&quot;Precentage&quot;, col = rainbow(length(x)))</code></pre>
-<p><img src="First_Asset_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="First_Asset_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 </div>
 <div id="top-10-googles-offices-with-highest-number-of-interview" class="section level3">
 <h3>Top 10 Google’s offices with highest number of interview</h3>
 <pre class="r"><code>x &lt;- tail(sort(table(result$location)),10)
 pie(x, main=&quot;Precentage&quot;, col = rainbow(length(x)))</code></pre>
-<p><img src="First_Asset_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="First_Asset_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 </div>
 
 
