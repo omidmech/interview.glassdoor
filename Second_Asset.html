@@ -15,7 +15,7 @@
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
@@ -102,33 +102,33 @@ summary {
 <style type="text/css">
 /* padding for bootstrap navbar */
 body {
-  padding-top: 51px;
+  padding-top: 45px;
   padding-bottom: 40px;
 }
 /* offset scroll position for anchor links (for fixed navbar)  */
 .section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
+  padding-top: 50px;
+  margin-top: -50px;
 }
 .dropdown-submenu {
   position: relative;
@@ -300,12 +300,30 @@ $(document).ready(function () {
 <pre class="r"><code>library(xml2)
 library(rvest)
 library(tibble)
-library(purrr)
-library(stringr)
-library(dplyr)
-library(lubridate)</code></pre>
-<div id="functions" class="section level1">
-<h1>FUNCTIONS</h1>
+library(purrr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;purrr&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:rvest&#39;:
+## 
+##     pluck</code></pre>
+<pre class="r"><code>library(stringr)
+library(dplyr)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:stats&#39;:
+## 
+##     filter, lag</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     intersect, setdiff, setequal, union</code></pre>
+<pre class="r"><code>library(lubridate)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:base&#39;:
+## 
+##     date</code></pre>
+<div id="functions" class="section level3">
+<h3>FUNCTIONS</h3>
 <pre class="r"><code>##### review_title function ##### 
 review_title &lt;- function(html){
   html %&gt;%
@@ -327,27 +345,20 @@ intreview_outcome &lt;- function(html){
   html_text()
 }</code></pre>
 </div>
-<div id="inputs" class="section level1">
-<h1>INPUTS</h1>
+<div id="inputs" class="section level3">
+<h3>INPUTS</h3>
 <pre class="r"><code>url &lt;- &quot;https://www.glassdoor.com/Interview/Amazon-Interview-Questions-E6036_P%d.htm&quot;
 last_page &lt;- 1
 pages_url &lt;- str_c(sprintf(url,1:last_page))
 pages_url &lt;- gsub(&quot;_P1.htm&quot;,&quot;.htm&quot;,pages_url)
 pages_url[1]</code></pre>
 <pre><code>## [1] &quot;https://www.glassdoor.com/Interview/Amazon-Interview-Questions-E6036.htm&quot;</code></pre>
-<pre class="r"><code>print(&quot;...&quot;)</code></pre>
-<pre><code>## [1] &quot;...&quot;</code></pre>
-<pre class="r"><code>print(&quot;...&quot;)</code></pre>
-<pre><code>## [1] &quot;...&quot;</code></pre>
-<pre class="r"><code>print(&quot;...&quot;)</code></pre>
-<pre><code>## [1] &quot;...&quot;</code></pre>
 <pre class="r"><code>pages_url[last_page]</code></pre>
 <pre><code>## [1] &quot;https://www.glassdoor.com/Interview/Amazon-Interview-Questions-E6036.htm&quot;</code></pre>
 </div>
-<div id="analysis" class="section level1">
-<h1>ANALYSIS</h1>
+<div id="analysis" class="section level3">
+<h3>ANALYSIS</h3>
 <pre class="r"><code>map_df(1:last_page,function(i){
-  
   cat(&quot;.&quot;)
   page_html &lt;- read_html (pages_url[i])
   Title &lt;- review_title (page_html)
@@ -357,12 +368,11 @@ pages_url[1]</code></pre>
     Experience_outcome &lt;- str_extract (Outcome,&quot;Positive|Negative&quot;)
     Interview_outcome &lt;- str_extract (Outcome,&quot;Difficult|Easy|Average&quot;)
   data.frame(Title,Location,Offer_outcome,Experience_outcome,Interview_outcome,stringsAsFactors = FALSE)
-  
 }) -&gt; result</code></pre>
 <pre><code>## .</code></pre>
 </div>
-<div id="number-of-negativepositive-interviews-experience-in-the-top-10-job-openings-in-amazon" class="section level1">
-<h1>Number of Negative/Positive interviews Experience in the top 10 job openings in Amazon</h1>
+<div id="number-of-negativepositive-interview-experience-in-the-top-10-job-openings-in-amazon" class="section level3">
+<h3>Number of Negative/Positive interview experience in the top 10 job openings in Amazon</h3>
 <pre class="r"><code>y &lt;- table(result$title, result$Experience_outcome)
 y &lt;- tail(y[order(rowSums(y)),],n=10)
 y &lt;- t(y)
@@ -370,8 +380,8 @@ par(mar=c(12,4,1,0.1))
 barplot(y, col = 2:3, legend = c(&quot;Negative&quot;, &quot;Positive&quot;), args.legend = list(x =&#39;top&#39;), ylab = &quot;Counts&quot;, cex.axis=1.0, cex.name=0.9, las=2, lwd=2, beside=TRUE)</code></pre>
 <p><img src="Second_Asset_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 </div>
-<div id="number-of-acceptedrejected-interviews-in-the-top-10-amazons-offices" class="section level1">
-<h1>Number of Accepted/Rejected interviews in the top 10 Amazon’s offices</h1>
+<div id="number-of-acceptedrejected-interview-in-the-top-10-amazons-offices" class="section level3">
+<h3>Number of Accepted/Rejected interview in the top 10 Amazon’s offices</h3>
 <pre class="r"><code>y &lt;- table(result$location, result$Offer_outcome)
 y &lt;- tail(y[order(rowSums(y)),],n=10)
 y &lt;- t(y)
@@ -379,8 +389,8 @@ par(mar=c(10,4,1,0.1))
 barplot(y, col = 3:2, legend = c(&quot;Accepted&quot;,&quot;Rejected&quot;), args.legend = list(x =&#39;top&#39;), ylab = &quot;Counts&quot;, cex.axis=1.0, cex.name=0.9, las=2, lwd=2, beside=TRUE)</code></pre>
 <p><img src="Second_Asset_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
-<div id="number-of-interview-harship-level-in-the-top-10-top-job-openings-in-amazon" class="section level1">
-<h1>Number of Interview Harship Level in the top 10 top job openings in Amazon</h1>
+<div id="number-of-interview-hardship-level-easyaveragehard-in-the-top-10-top-job-openings-in-amazon" class="section level3">
+<h3>Number of Interview Hardship Level (Easy/Average/Hard) in the top 10 top job openings in Amazon</h3>
 <pre class="r"><code>y &lt;- table(result$title, result$Interview_outcome)
 y &lt;- tail(y[order(rowSums(y)),],n=10)
 y &lt;- t(y)

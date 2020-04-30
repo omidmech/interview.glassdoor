@@ -1,6 +1,8 @@
 ---
 title: "Second Asset"
-output: html_document
+output: 
+  html_document:
+    theme: yeti
 ---
 
 ```{r}
@@ -13,7 +15,7 @@ library(dplyr)
 library(lubridate)
 ```
 
-# FUNCTIONS
+### FUNCTIONS
 ```{r}
 ##### review_title function ##### 
 review_title <- function(html){
@@ -38,22 +40,18 @@ intreview_outcome <- function(html){
 
 ```
 
-# INPUTS
+### INPUTS
 ```{r}
 url <- "https://www.glassdoor.com/Interview/Amazon-Interview-Questions-E6036_P%d.htm"
 last_page <- 1
 pages_url <- str_c(sprintf(url,1:last_page))
 pages_url <- gsub("_P1.htm",".htm",pages_url)
 pages_url[1]
-print("...")
-print("...")
-print("...")
 pages_url[last_page]
 ```
-# ANALYSIS
+### ANALYSIS
 ```{r}
 map_df(1:last_page,function(i){
-  
   cat(".")
   page_html <- read_html (pages_url[i])
   Title <- review_title (page_html)
@@ -63,11 +61,10 @@ map_df(1:last_page,function(i){
     Experience_outcome <- str_extract (Outcome,"Positive|Negative")
     Interview_outcome <- str_extract (Outcome,"Difficult|Easy|Average")
   data.frame(Title,Location,Offer_outcome,Experience_outcome,Interview_outcome,stringsAsFactors = FALSE)
-  
 }) -> result
 ```
 
-# Number of Negative/Positive interviews Experience in the top 10 job openings in Amazon
+### Number of Negative/Positive interview experience in the top 10 job openings in Amazon
 ```{r}
 y <- table(result$title, result$Experience_outcome)
 y <- tail(y[order(rowSums(y)),],n=10)
@@ -76,7 +73,7 @@ par(mar=c(12,4,1,0.1))
 barplot(y, col = 2:3, legend = c("Negative", "Positive"), args.legend = list(x ='top'), ylab = "Counts", cex.axis=1.0, cex.name=0.9, las=2, lwd=2, beside=TRUE)
 ```
 
-# Number of Accepted/Rejected interviews in the top 10 Amazon's offices
+### Number of Accepted/Rejected interview in the top 10 Amazon's offices
 ```{r}
 y <- table(result$location, result$Offer_outcome)
 y <- tail(y[order(rowSums(y)),],n=10)
@@ -85,7 +82,7 @@ par(mar=c(10,4,1,0.1))
 barplot(y, col = 3:2, legend = c("Accepted","Rejected"), args.legend = list(x ='top'), ylab = "Counts", cex.axis=1.0, cex.name=0.9, las=2, lwd=2, beside=TRUE)
 ```
 
-# Number of Interview Harship Level in the top 10 top job openings in Amazon
+### Number of Interview Hardship Level (Easy/Average/Hard) in the top 10 top job openings in Amazon
 ```{r}
 y <- table(result$title, result$Interview_outcome)
 y <- tail(y[order(rowSums(y)),],n=10)
