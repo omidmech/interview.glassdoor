@@ -12,7 +12,7 @@ library(dplyr)
 library(lubridate)
 ```
 
-### FUNCTIONS
+### Functions
 ```{r}
 ##### review_title function ##### 
 review_title <- function(html){
@@ -36,17 +36,17 @@ intreview_outcome <- function(html){
 }
 ```
 
-### INPUTS
+### Inputs
 ```{r}
 url <- "https://www.glassdoor.com/Interview/Amazon-Interview-Questions-E6036_P%d.htm"
-last_page <- 10
+last_page <- 1000
 pages_url <- str_c(sprintf(url,1:last_page))
 pages_url <- gsub("_P1.htm",".htm",pages_url)
 pages_url[1]
 pages_url[last_page]
 ```
 
-### ANALYSIS
+### Analysis
 ```{r}
 map_df(1:last_page,function(i){
   cat(".")
@@ -70,7 +70,7 @@ par(mar=c(12,4,1,0.1))
 barplot(y, col = 2:3, legend = c("Negative", "Positive"), args.legend = list(x ='top'), ylab = "Counts", cex.axis=1.0, cex.name=0.9, las=2, lwd=2, beside=TRUE)
 ```
 
-### Number of Accepted/Rejected interview in the top 10 Amazon's offices
+### Number of Accepted/Rejected job offer in the top 10 Amazon's offices
 ```{r}
 y <- table(result$location, result$Offer_outcome)
 y <- tail(y[order(rowSums(y)),],n=10)
