@@ -1,4 +1,6 @@
-rmarkdown::render_site()
-$ git add *
-$ git commit -m "commit 1"
-$ git push origin master
+Console:
+	rmarkdown::render_site()
+Terminal:
+	$ git add *
+	$ git commit -m "commit 1"
+	$ git push origin master
